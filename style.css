@@ -1,23 +1,20 @@
 * {
     box-sizing: border-box;
-}
-
-body {
-    background: blue;
+  }
+  
+  body {
+    background: black;
+    color: var(--grey);
     margin: 0;
     padding: 0;
-}
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
 
 header {
-    background: black;
-    padding: 30px 25px;
-    border-bottom: blueviolet;
-    color: blanchedalmond;
+    background: blueviolet;
+    color: cornsilk;
 }
-
-header p {
-    color: blanchedalmond;
-    margin: 5px 0 20px;
-    font-size: 2rem;
-}
-
+  
