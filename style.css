@@ -2,19 +2,15 @@
     box-sizing: border-box;
   }
   
-  body {
+body {
     background: black;
-    color: var(--grey);
     margin: 0;
     padding: 0;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
+}
 
 header {
     background: blueviolet;
     color: cornsilk;
 }
+
   
