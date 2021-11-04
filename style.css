@@ -1,1 +1,23 @@
-/* TESTING FORST COMMIT */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: blue;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: black;
+    padding: 30px 25px;
+    border-bottom: blueviolet;
+    color: blanchedalmond;
+}
+
+header p {
+    color: blanchedalmond;
+    margin: 5px 0 20px;
+    font-size: 2rem;
+}
+
