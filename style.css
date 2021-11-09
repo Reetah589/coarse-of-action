@@ -39,14 +39,14 @@ header p {
     margin-right: 30px;
   }
   
-  .task-item {
+.task-item {
     color: black;
     padding: 15px 15px;
     border: 2px solid black;
     background: darkgray;
     border-radius: 12px;
     margin-bottom: 15px;
-  }
+}
 
 .btn {
     outline: none;
@@ -104,5 +104,18 @@ form .form-group {
     border-radius: 12px;
 } 
 
+.page-content {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 25px auto;
+    width: 95%;
+  }
+
+.task-list-wrapper {
+    flex: 1;
+    margin: 0 20px 20px;
+}  
 
   
