@@ -13,14 +13,17 @@ var taskFormHandler = function(event) {
     var taskNameInput = document.querySelector("input[name='task-name']").value;
     var taskTypeInput = document.querySelector("select[name='task-type']").value;
 
+    // make sure something is entered on input    
     if (!taskNameInput || !taskTypeInput) {
         alert("You need to fill out the task form!");
         return false;
     }
 
+    // input empties in order to enter something new 
     document.querySelector("input[name='task-name']").value = "";
     document.querySelector("select[name='task-type']").selectedIndex = 0;
 
+    // input is being edited 
     var isEdit = formEl.hasAttribute("data-task-id");
 
     if (isEdit) {
@@ -72,6 +75,7 @@ var createTaskEl = function(taskDataObj){
 
     tasks.push(taskDataObj);
 
+    // save to local storage
     saveTasks();
 
     taskIdCounter++;
@@ -81,24 +85,28 @@ var createTaskActions = function(taskId) {
     var actionContainerEl = document.createElement("div");
     actionContainerEl.className = "task-actions";
 
+    // edit button
     var editButtonEl = document.createElement("button");
     editButtonEl.textContent = "Edit";
     editButtonEl.className = "btn edit-btn";
     editButtonEl.setAttribute("data-task-id", taskId);
     actionContainerEl.appendChild(editButtonEl);
 
+    // delete button
     var deleteButtonEl = document.createElement("button");
     deleteButtonEl.textContent = "Delete";
     deleteButtonEl.className = "btn delete-btn";
     deleteButtonEl.setAttribute("data-task-id", taskId);
     actionContainerEl.appendChild(deleteButtonEl);
 
+    // change status dropdown
     var statusSelectEl = document.createElement("select");
     statusSelectEl.className = "select-status";
     statusSelectEl.setAttribute("name", "status-change");
     statusSelectEl.setAttribute("data-task-id", taskId);
     actionContainerEl.appendChild(statusSelectEl);
 
+    // status options
     var statusChoices = ["To Start", "In Progress", "Completed"];
 
     for (var i = 0; i < statusChoices.length; i++) {
@@ -130,6 +138,7 @@ var completeEditTask = function(taskName, taskType, taskId) {
     formEl.removeAttribute("data-task-id");
     document.querySelector("#save-task").textContent = "Add Task";
 
+    // saves to local storage
     saveTasks();
 };
 
@@ -229,10 +238,13 @@ var loadTasks = function() {
     }
 };
   
+// Creates New Action to do
 formEl.addEventListener("submit", taskFormHandler); 
 
+// edit and delete buttons
 pageContentEl.addEventListener("click", taskButtonHandler);
 
+// changing the status
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
 
 loadTasks();
