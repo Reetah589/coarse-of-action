@@ -31,7 +31,7 @@ var taskFormHandler = function(event) {
         var taskDataObj = {
             name: taskNameInput,
             type: taskTypeInput,
-            status: "to do"
+            status: "to do",
         };
 
         createTaskEl(taskDataObj);
@@ -52,7 +52,7 @@ var createTaskEl = function(taskDataObj){
     listItemEl.appendChild(taskActionsEl);
 
     switch (taskDataObj.status) {
-        case "to start":
+        case "to do":
             taskActionsEl.querySelector("select[name='status-change']").selectedIndex = 0;
             tasksToDoEl.append(listItemEl);
             break;
@@ -214,8 +214,25 @@ var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+var loadTasks = function() {
+    var savedTasks = localStorage.getItem("tasks");
+    
+    if (!savedTasks) {
+      return false;
+    }
+    console.log("Saved tasks found!");
+
+    savedTasks = JSON.parse(savedTasks);
+  
+    for (var i = 0; i < savedTasks.length; i++) {
+      createTaskEl(savedTasks[i]);
+    }
+};
+  
 formEl.addEventListener("submit", taskFormHandler); 
 
 pageContentEl.addEventListener("click", taskButtonHandler);
 
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
+
+loadTasks();
