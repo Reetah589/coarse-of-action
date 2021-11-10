@@ -114,6 +114,7 @@ var createTaskActions = function(taskId) {
 
 var completeEditTask = function(taskName, taskType, taskId) {
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
+
     taskSelected.querySelector("h3.task-name").textContent = taskName;
     taskSelected.querySelector("span.task-type").textContent = taskType;
 
@@ -128,6 +129,7 @@ var completeEditTask = function(taskName, taskType, taskId) {
 
     formEl.removeAttribute("data-task-id");
     document.querySelector("#save-task").textContent = "Add Task";
+
     saveTasks();
 };
 
@@ -139,7 +141,6 @@ var taskButtonHandler = function(event) {
         editTask(taskId);
     }
     else if (targetEl.matches(".delete-btn")) {
-        console.log("delete", targetEl);
         var taskId = targetEl.getAttribute("data-task-id");
         deleteTask(taskId);
     }
@@ -154,7 +155,7 @@ var taskStatusChangeHandler = function(event) {
   
     var statusValue = event.target.value.toLowerCase();
   
-    if (statusValue === "to do") {
+    if (statusValue === "to start") {
       tasksToDoEl.appendChild(taskSelected);
     } 
     else if (statusValue === "in progress") {
@@ -187,7 +188,7 @@ var editTask = function(taskId) {
     document.querySelector("select[name='task-type']").value = taskType;
 
     formEl.setAttribute("data-task-id", taskId);
-    document.querySelector("#save-task").textContent = "Save Task";
+    formEl.querySelector("#save-task").textContent = "Save Task";
 };
 
 var deleteTask = function(taskId) {
@@ -212,11 +213,6 @@ var deleteTask = function(taskId) {
 var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
-
-var loadTasks = function() {
-    var savedTasks = localStorage.getItem("tasks");
-}
-
 
 formEl.addEventListener("submit", taskFormHandler); 
 
