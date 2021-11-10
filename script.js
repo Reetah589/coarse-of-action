@@ -2,9 +2,10 @@ var taskIdCounter = 0;
 
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
-var pageContentEl = document.querySelector("#page-content");
 var tasksInProgressEl = document.querySelector("#tasks-in-progress");
 var tasksCompletedEl = document.querySelector("#tasks-completed");
+var pageContentEl = document.querySelector("#page-content");
+
 var tasks = []
 
 var taskFormHandler = function(event) {
@@ -38,11 +39,8 @@ var taskFormHandler = function(event) {
 };
 
 var createTaskEl = function(taskDataObj){
-    console.log(taskDataObj);
-    console.log(taskDataObj.status);
     var listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
-
     listItemEl.setAttribute("data-task-id", taskIdCounter);
 
     var taskInfoEl = document.createElement("div");
@@ -52,10 +50,13 @@ var createTaskEl = function(taskDataObj){
 
     var taskActionsEl = createTaskActions(taskIdCounter);
     listItemEl.appendChild(taskActionsEl);
+
     tasksToDoEl.appendChild(listItemEl);
 
     taskDataObj.id = taskIdCounter;
     tasks.push(taskDataObj);
+
+    saveTasks();
 
     taskIdCounter++;
 };
@@ -111,6 +112,7 @@ var completeEditTask = function(taskName, taskType, taskId) {
 
     formEl.removeAttribute("data-task-id");
     document.querySelector("#save-task").textContent = "Add Task";
+    saveTasks();
 };
 
 var taskButtonHandler = function(event) {
@@ -147,11 +149,12 @@ var taskStatusChangeHandler = function(event) {
     }
 
     for (var i = 0; i < tasks.length; i++) {
-        console.log(tasks);
         if (tasks[i].id === parseInt(taskId)) {
             tasks[i].status = statusValue;
         }
     }
+
+    saveTasks();
 };
 
 var editTask = function(taskId) {
@@ -186,11 +189,18 @@ var deleteTask = function(taskId) {
     }
 
     tasks = updatedTaskArr;
+
+    saveTasks();
 };
 
 var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+
+var loadTasks = function() {
+    var savedTasks = localStorage.getItem("tasks");
+}
+
 
 formEl.addEventListener("submit", taskFormHandler); 
 
