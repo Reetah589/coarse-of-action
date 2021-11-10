@@ -1,6 +1,7 @@
+var taskIdCounter = 0;
+
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
-var taskIdCounter = 0;
 var pageContentEl = document.querySelector("#page-content");
 var tasksInProgressEl = document.querySelector("#tasks-in-progress");
 var tasksCompletedEl = document.querySelector("#tasks-completed");
@@ -13,19 +14,17 @@ var taskFormHandler = function(event) {
     if (!taskNameInput || !taskTypeInput) {
         alert("You need to fill out the task form!");
         return false;
-
-        formEl.reset()
     }
 
+    document.querySelector("input[name='task-name']").value = "";
+    document.querySelector("select[name='task-type']").selectedIndex = 0;
+
     var isEdit = formEl.hasAttribute("data-task-id");
-    console.log(isEdit);
 
     if (isEdit) {
         var taskId = formEl.getAttribute("data-task-id");
         completeEditTask(taskNameInput, taskTypeInput, taskId);
-    }
-
-    else {
+    } else {
         var taskDataObj = {
             name: taskNameInput,
             type: taskTypeInput
@@ -33,13 +32,6 @@ var taskFormHandler = function(event) {
 
         createTaskEl(taskDataObj);
     }
-    
-    var taskDataObj = {
-        name: taskNameInput,
-        type: taskTypeInput
-    };
-
-    createTaskEl(taskDataObj);
 };
 
 var createTaskEl = function(taskDataObj){
